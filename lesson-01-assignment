@@ -12,4 +12,22 @@ enrollments.each do |enrollment|
     puts "#{student.id} #{student.email}"
 end
 
+# Question 2 Email all mentors who have not assigned a final grade
 
+25, jung.lindgren@runolfsson.example
+26, amelia.miller@upton-goyette.example
+
+trimester_id = Trimester.find_by(term: 'Spring', year: '2025')
+coding_class_id = CodingClass.find_by(title: 'Intro to Programming')
+course = Course.find_by(trimester_id: trimester_id.id, coding_class_id: coding_class_id.id)
+enrollments = Enrollment.where(course_id: course.id, final_grade: nil)
+enrollments.each do |enrollment|
+  mentor_assignment = MentorEnrollmentAssignment.find_by(enrollment_id: enrollment.id) 
+  if mentor_assignment
+    mentor_id = mentor_assignment.mentor_id
+    mentor = Mentor.find_by(id: mentor_id)
+    if mentor
+      puts "#{mentor.id}, #{mentor.email}"
+    end
+  end
+end
