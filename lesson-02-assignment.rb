@@ -25,3 +25,18 @@ mentor=MentorEnrollmentAssignment
 if mentor.present?
     MentorEnrollmentAssignment.create(mentor_id: mentor.first, enrollment_id: enrollment.id)
 end
+
+# Question 3 - Describe your project
+Book Worms Society is a collaborative blogging platform for book lovers. It provides a space for users to share posts about books, literary discussions, and reading experiences. 
+Key features include:
+- Users can create posts on various literary topics, such as book reviews, author highlights, and reading challenges.
+- Users can engage in conversations through comments, reply to others, and participate in in-depth discussions.
+- Posts and comments can be liked.
+- Users can bookmark posts for later.
+- Users can follow others to stay updated on their latest posts and interact more closely.
+- Users can create a personalized profile with a bio and avatar, enhancing their presence in the community.
+- Posts can be tagged with relevant keywords, allowing for easy discovery of topics related to specific books, genres, or themes.
+- Users can follow tags to stay updated on posts related to specific topics or interests.
+
+# Question 4 - Design the data model for your project
+# Look at the image in the root of the project.
