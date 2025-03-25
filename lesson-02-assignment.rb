@@ -17,11 +17,12 @@ course = Course.find_by(coding_class_id: coding_class.id, trimester_id: trimeste
 enrollment = Enrollment.create(course_id: course.id, student_id: new_student.id)
 
 # Find a mentor with no more than 2 students (enrollments) assigned and assign that mentor to your new student's enrollment.
-mentor = MentorEnrollmentAssignment
-  .group(:mentor_id)
-  .having('COUNT(enrollment_id) <= 2')
+mentor = Mentor
+  .joins('LEFT JOIN mentor_enrollment_assignments ON mentor_enrollment_assignments.mentor_id = mentors.id')
+  .group('mentors.id')
+  .having('COUNT(mentor_enrollment_assignments.id) <= 2')
   .limit(1)
-  .pluck(:mentor_id)
+  .pluck(:id)
 if mentor.present?
     MentorEnrollmentAssignment.create(mentor_id: mentor.first, enrollment_id: enrollment.id)
 end
