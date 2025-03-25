@@ -12,14 +12,14 @@ end
 # Create a new student record and enroll the student in the Intro to Programming course for the Spring 2026 trimester.
 new_student = Student.create(first_name: 'Harry', last_name: 'Potter', email: 'harrypotter@owl.post')
 trimester = Trimester.find_by(year: '2026', term: 'Spring') 
-conding_class=CodingClass.find_by(title: 'Intro to Programming')
-course=Course.find_by(coding_class_id: coding_class.id, trimester_id: trimester.id)
-enrollment=Enrollment.create(course_id: course.id, student_id: new_student.id)
+coding_class = CodingClass.find_by(title: 'Intro to Programming')
+course = Course.find_by(coding_class_id: coding_class.id, trimester_id: trimester.id)
+enrollment = Enrollment.create(course_id: course.id, student_id: new_student.id)
 
 # Find a mentor with no more than 2 students (enrollments) assigned and assign that mentor to your new student's enrollment.
-mentor=MentorEnrollmentAssignment
+mentor = MentorEnrollmentAssignment
   .group(:mentor_id)
-  .having('COUNT(mentor_id)<=2')
+  .having('COUNT(enrollment_id) <= 2')
   .limit(1)
   .pluck(:mentor_id)
 if mentor.present?
